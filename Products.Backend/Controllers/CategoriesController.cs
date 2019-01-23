@@ -12,6 +12,7 @@ using Products.Domain;
 
 namespace Products.Backend.Controllers
 {
+    [Authorize(Users ="Durbaez3@gmail.com")]
     public class CategoriesController : Controller
     {
         private DataContextLocal db = new DataContextLocal();
@@ -38,6 +39,7 @@ namespace Products.Backend.Controllers
         }
 
         // GET: Categories/Create
+        
         public ActionResult Create()
         {
             return View();

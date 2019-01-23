@@ -14,6 +14,7 @@ namespace Products.Domain
         [Key]
         public int ProductId { get; set; }
 
+        [ForeignKey("Category")]
         public int CategoryId { get; set; }
 
         [Required(ErrorMessage = "The Field {0} is required")]
@@ -28,6 +29,8 @@ namespace Products.Domain
         [Display(Name ="Is Active?")]
         public bool IsActive { get; set; }
 
+        public string Image { get; set; }
+
         public double Stock { get; set; }
 
         [Display(Name = "Last Purchase?")]
@@ -38,6 +41,6 @@ namespace Products.Domain
         public String Remarks { get; set; }
 
         [JsonIgnore]
-        public virtual Category Categories { get; set; }
+        public virtual Category Category { get; set; }
     }
 }
