@@ -1,8 +1,18 @@
-﻿using System;
+﻿using Products.Models;
+using System;
+using System.Collections.ObjectModel;
+
 namespace Products.ViewModels
 {
     public class CategoriesViewModel
     {
+        #region Properties
+        public ObservableCollection<Category> Categories
+        {
+            get; set;
+        }
+        #endregion
+
         #region Constructor
         public CategoriesViewModel()
         {
