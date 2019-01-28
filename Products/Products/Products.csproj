@@ -26,5 +26,6 @@
   <ItemGroup>
     <Compile Remove="MainPage.xaml.cs" />
     <Compile Remove="Services\async.cs" />
+    <Compile Remove="Views\ProductsView.cs" />
   </ItemGroup>
 </Project>

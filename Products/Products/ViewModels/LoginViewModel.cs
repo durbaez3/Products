@@ -3,10 +3,7 @@ namespace Products.ViewModels
 {
     using GalaSoft.MvvmLight.Command;
     using System.Windows.Input;
-    using Xamarin.Forms;
     using Services;
-    using System;
-    using Products.Views;
 
     public class LoginViewModel : BaseViewModel
     {
@@ -20,6 +17,7 @@ namespace Products.ViewModels
         #region Services
         DialogService dialogService;
         ApiService apiService;
+        NavigationService navigationService;
         #endregion
 
         #region Properties
@@ -78,12 +76,14 @@ namespace Products.ViewModels
                 return;
             }
 
+            this.IsRunning = true;
+            this.IsEnabled = false;
 
             var connection = await apiService.CheckConnection();
             if (!connection.IsSuccess)
             {
-                this.IsRunning = true;
-                this.IsEnabled = false;
+                this.IsRunning = false;
+                this.IsEnabled = true;
 
                 await dialogService.ShowMessage("Error", connection.Message);
                 return;
@@ -117,10 +117,6 @@ namespace Products.ViewModels
                 return;
             }
 
-            await dialogService.ShowMessage(
-                    "WELCOME",
-                    "Ha ingresado");
-
             Email = null;
             Password = null;
 
@@ -129,7 +125,7 @@ namespace Products.ViewModels
 
             MainViewModel.GetInstance().Token = response;
             MainViewModel.GetInstance().Categories = new CategoriesViewModel();
-            await Application.Current.MainPage.Navigation.PushAsync(new CategoriesView());
+            await navigationService.Navigate("CategoriesView");
         }
         #endregion
 
@@ -138,12 +134,12 @@ namespace Products.ViewModels
         {
             dialogService = new DialogService();
             apiService = new ApiService();
-
+            navigationService = new NavigationService();
             this.IsRemembered = true;
             this.IsEnabled = true;
 
-            this.Email = "test";
-            this.Password = "123";
+            this.Email = "durbaez3@gmail.com";
+            this.Password = "123456";
 
             //http://restcountries.eu/rest/v2/all
         }
