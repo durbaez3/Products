@@ -26,6 +26,11 @@ namespace Products.ViewModels
             get; set;
         }
 
+        public EditCategoryViewModel EditCategory
+        {
+            get; set;
+        }
+
         public ProductsViewModel Products
         {
             get; set;
