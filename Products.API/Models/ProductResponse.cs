@@ -7,6 +7,8 @@ namespace Products.API.Models
 {
     public class ProductResponse
     {
+        public int CategoryId { get; set; }
+
         public int ProductId { get; set; }
 
         public string Description { get; set; }
