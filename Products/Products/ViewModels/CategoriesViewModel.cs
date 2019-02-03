@@ -9,6 +9,7 @@ namespace Products.ViewModels
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows.Input;
 
     public class CategoriesViewModel : BaseViewModel
@@ -64,6 +65,44 @@ namespace Products.ViewModels
 
             oldCategory = category;
             //categories.Add(category);
+            Categories = new ObservableCollection<Category>(
+                categories.OrderBy(c => c.Description));
+            IsRefreshing = false;
+        }
+
+        public async Task DeleteCategory(Category category)
+        {
+            IsRefreshing = true;
+
+
+            var connection = await apiService.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+                IsRefreshing = false;
+                await dialogService.ShowMessage("Error", connection.Message);
+                return;
+            }
+
+            var mainViewModel = MainViewModel.GetInstance();
+
+            var response = await apiService.Delete(
+                "https://productsapifab.azurewebsites.net",
+                "/api",
+                "/Categories",
+                mainViewModel.Token.TokenType,
+                mainViewModel.Token.AccessToken,
+                category);
+
+            if (!response.IsSuccess)
+            {
+                IsRefreshing = false;
+                await dialogService.ShowMessage(
+                    "Error",
+                    response.Message);
+                return;
+            }
+
+            categories.Remove(category);
             Categories = new ObservableCollection<Category>(
                 categories.OrderBy(c => c.Description));
             IsRefreshing = false;

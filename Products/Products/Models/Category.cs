@@ -10,6 +10,7 @@
     public class Category
     {
         #region Services
+        DialogService dialogService;
         NavigationService navigationService;
         #endregion
         #region Properties
@@ -21,6 +22,26 @@
         #endregion
 
         #region Commands
+        public ICommand DeleteCommand 
+        { 
+            get
+            {
+                return new RelayCommand(Delete);
+            }
+        }
+
+        async void Delete()
+        {
+            var response = await dialogService.ShowConfirm(
+                "Confirm",
+                "Area you Sure to delete this record?");
+            if (!response)
+            {
+                return;
+            }
+            CategoriesViewModel.GetInstance().DeleteCategory(this);
+        }
+
         public ICommand EditCommand
         {
             get
@@ -55,6 +76,7 @@
         public Category()
         {
             navigationService = new NavigationService();
+            dialogService = new DialogService();
         }
         #endregion
 
