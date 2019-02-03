@@ -63,6 +63,7 @@ namespace Products.ViewModels
                 Where(c => c.CategotyId == category
                 .CategotyId).FirstOrDefault();
 
+
             oldCategory = category;
             //categories.Add(category);
             Categories = new ObservableCollection<Category>(

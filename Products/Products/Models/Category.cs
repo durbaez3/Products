@@ -28,6 +28,7 @@
             {
                 return new RelayCommand(Delete);
             }
+
         }
 
         async void Delete()
