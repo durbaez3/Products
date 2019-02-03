@@ -40,15 +40,14 @@
             {
                 return;
             }
-            CategoriesViewModel.GetInstance().DeleteCategory(this);
+            await CategoriesViewModel.GetInstance().DeleteCategory(this);
         }
 
         public ICommand EditCommand
         {
             get
             {
-                return new RelayCommand(Edit)
-;
+                return new RelayCommand(Edit);
             }
         }
 
@@ -62,8 +61,7 @@
         { 
             get
             {
-                return new RelayCommand(SelectCategory)
-;            }
+                return new RelayCommand(SelectCategory);            }
         }
 
         async void SelectCategory()

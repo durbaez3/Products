@@ -1,8 +1,19 @@
 ﻿using System;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
+using Products.Services;
+using Products.ViewModels;
+
 namespace Products.Models
 {
     public class Product
     {
+        #region Services
+        DialogService dialogService;
+        NavigationService navigationService;
+        #endregion
+
+        #region Properties
         public int ProductId { get; set; }
         public int CategotyId { get; set; }
         public string Description { get; set; }
@@ -12,7 +23,7 @@ namespace Products.Models
         public DateTime LastPurchase { get; set; }
         public double Stock { get; set; }
         public string Remarks { get; set; }
-        public string ImageFullPath 
+        public string ImageFullPath
         {
             get
             {
@@ -22,7 +33,28 @@ namespace Products.Models
                     Image.Substring(1));
                 }
                 return Image;
-            } 
+            }
+        }
+        #endregion
+
+        public ICommand EditCommand
+        {
+            get
+            {
+                return new RelayCommand(Edit);
+            }
+        }
+
+        async void Edit()
+        {
+            MainViewModel.GetInstance().EditProduct = new EditProductViewModel(this);
+            await navigationService.Navigate("EditProductView");
+        }
+
+        public Product()
+        {
+            dialogService = new DialogService();
+            navigationService = new NavigationService();
         }
 
     }

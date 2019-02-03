@@ -7,9 +7,8 @@ namespace Products.ViewModels
     using Products.Models;
     using Products.Services;
 
-    public class NewCategoryViewModel : BaseViewModel
+    public class NewProductViewModel : BaseViewModel
     {
-
         #region Services
         DialogService dialogService;
         ApiService apiService;
@@ -18,96 +17,109 @@ namespace Products.ViewModels
 
         #region Attributes
         private bool isRunning;
-        public bool isEnabled;
-        #endregion 
+        public bool isActive;
+        #endregion
 
         #region Properties
 
-        public string Description 
+        public string Description
+        {
+            get; set;
+        }
+        public decimal Price 
         { 
             get; set; 
         }
-
         public bool IsRunning
         {
             get { return this.isRunning; }
             set { SetValue(ref this.isRunning, value); }
         }
 
-        public bool IsEnabled
+        public bool IsActive
         {
-            get { return this.isEnabled; }
-            set { SetValue(ref this.isEnabled, value); }
+            get { return this.isActive; }
+            set { SetValue(ref this.isActive, value); }
         }
-
+        public DateTime LastPurchase 
+        {   
+            get; set; 
+        }
+        public double Stock 
+        { 
+            get; set; 
+        }
+        public string Remarks 
+        { 
+            get; set; 
+        }
         #endregion
 
         #region Constructors
-        public NewCategoryViewModel()
+        public NewProductViewModel()
         {
             dialogService = new DialogService();
             apiService = new ApiService();
             navigationService = new NavigationService();
-            this.IsEnabled = true;
-
-
-            //http://restcountries.eu/rest/v2/all
+            this.IsActive = true;
         }
         #endregion
 
         #region Commands
-        public ICommand SaveCommand 
+        public ICommand SaveCommand
         {
             get
             {
                 return new RelayCommand(Save);
             }
         }
-        async void  Save()
+        async void Save()
         {
             if (String.IsNullOrEmpty(Description))
             {
                 await dialogService.ShowMessage(
                                 "Error",
-                                 "You must enter a Category Description.");
+                                 "You must enter a Product Description.");
                 return;
             }
 
             IsRunning = true;
-            IsEnabled = false;
 
             var connection = await apiService.CheckConnection();
             if (!connection.IsSuccess)
             {
                 this.IsRunning = false;
-                this.IsEnabled = true;
 
                 await dialogService.ShowMessage("Error", connection.Message);
                 return;
             }
 
-            var category = new Category
+            var product = new Product
             {
-                Description = Description
+                CategotyId = MainViewModel.GetInstance().Category.CategotyId,
+                Description = Description,
+                Price = Price,
+                Stock = Stock,
+                Remarks = Remarks,
+                IsActive = IsActive,
+                LastPurchase = DateTime.Now,
             };
 
             this.IsRunning = false;
-            this.IsEnabled = true;
 
             var mainViewModel = MainViewModel.GetInstance();
 
             var response = await apiService.Post(
                 "https://productsapifab.azurewebsites.net"
-                ,"/api"
-                ,"/Categories",
+                , "/api"
+                , "/Products",
                 mainViewModel.Token.TokenType
-                ,mainViewModel.Token.AccessToken,
-                category);
+                , mainViewModel.Token.AccessToken,
+                product);
 
             if (!response.IsSuccess)
             {
                 IsRunning = false;
-                IsEnabled = true;
                 await dialogService.ShowMessage(
                     "Error",
                     response.Message);
@@ -116,16 +128,15 @@ namespace Products.ViewModels
             }
             //Retrnar para actualizar nuevo registro
             //actualizamos solo el nuevo regsitro
-            category = (Category)response.Result;
-            var categoriesViewModel= CategoriesViewModel.GetInstance();
-            categoriesViewModel.AddCategory(category);
+            var listProduct = MainViewModel.GetInstance().Products;
+            product = (Product)response.Result;
+            var productViewModel = ProductsViewModel.GetInstance();
+            productViewModel.AddProduct(product);
 
             await navigationService.Back();
 
             IsRunning = false;
-            IsEnabled = true;
         }
         #endregion
-
     }
 }

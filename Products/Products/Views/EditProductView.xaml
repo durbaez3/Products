@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Products.Views.EditProductView"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Edit Product">
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext = "{Binding EditProduct}"
+            Padding = "10">
+            <Label
+                Text="Product"></Label>
+            <Entry
+                Text = "{Binding Description, Mode=TwoWay}"
+                Placeholder="Entry Product Description"></Entry>
+            <Label
+                Text="Price"></Label>
+            <Entry
+                Text = "{Binding Price, Mode=TwoWay}"
+                Placeholder="Entry Price"></Entry>
+            <StackLayout
+                Orientation="Horizontal"
+                    Margin="10,0">
+                <Label
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Text="Is Active?">
+                </Label>
+                <Switch
+                    HorizontalOptions="End"
+                        IsToggled = "{Binding IsActive, Mode=TwoWay}">
+                </Switch>
+            </StackLayout>
+            <Label
+                Text="LastPurchase"></Label>
+            <DatePicker
+                Date ="{Binding LastPurchase}">                
+            </DatePicker>
+            <Label
+                Text="Stock"></Label>
+            <Entry
+                Text = "{Binding Stock, Mode=TwoWay}"
+                Placeholder="Entry Stock"></Entry>
+            <Label
+                Text="Remarks"></Label>
+            <Entry
+                Text = "{Binding Remarks, Mode=TwoWay}"
+                Placeholder="Entry Remarks"></Entry>
+            <ActivityIndicator
+                    VerticalOptions="CenterAndExpand"
+                    IsRunning = "{Binding IsRunning, Mode=TwoWay}">
+            </ActivityIndicator>
+            <Button
+                    Text="Save"
+                    Command = "{Binding SaveCommand}"
+                    BackgroundColor="Navy"
+                    TextColor="White"
+                    BorderRadius="20"
+                    HeightRequest="46"
+                    Margin="50,0"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled = "{Binding IsEnabled, Mode=TwoWay}"
+                VerticalOptions="EndAndExpand">
+                </Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

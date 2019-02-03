@@ -1,13 +1,14 @@
-﻿namespace Products.ViewModels
+﻿
+namespace Products.ViewModels
 {
     using System;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Products.Models;
     using Products.Services;
-
-    public class EditCategoryViewModel : BaseViewModel
+    public class EditProductViewModel : BaseViewModel
     {
+
         #region Services
         DialogService dialogService;
         ApiService apiService;
@@ -16,44 +17,60 @@
 
         #region Attributes
         private bool isRunning;
-        public bool isEnabled;
-        Category category;
-        private Product product;
+        public bool isActive;
+        Product product;
         #endregion
 
         #region Properties
-
         public string Description
         {
             get; set;
         }
-
+        public decimal Price
+        {
+            get; set;
+        }
         public bool IsRunning
         {
             get { return this.isRunning; }
             set { SetValue(ref this.isRunning, value); }
         }
 
-        public bool IsEnabled
+        public bool IsActive
         {
-            get { return this.isEnabled; }
-            set { SetValue(ref this.isEnabled, value); }
+            get { return this.isActive; }
+            set { SetValue(ref this.isActive, value); }
         }
-
-        #endregion
-       
-        #region Constructors
-        public EditCategoryViewModel(Category category)
+        public DateTime LastPurchase
         {
-            this.category = category;
+            get; set;
+        }
+        public double Stock
+        {
+            get; set;
+        }
+        public string Remarks
+        {
+            get; set;
+        }
+        #endregion
+
+        #region Constructor
+        public EditProductViewModel(Product product)
+        {
+            this.product = product;
             dialogService = new DialogService();
             apiService = new ApiService();
             navigationService = new NavigationService();
 
-            Description = category.Description;
-            this.IsEnabled = true;
-
+            Description = product.Description;
+            Price = product.Price;
+            Stock = product.Stock;
+            Remarks = product.Remarks;
+            IsActive = product.IsActive;
+            LastPurchase = product.LastPurchase;
         }
+
         #endregion
 
         #region Commands
@@ -76,46 +93,48 @@
             }
 
             IsRunning = true;
-            IsEnabled = false;
 
             var connection = await apiService.CheckConnection();
             if (!connection.IsSuccess)
             {
                 IsRunning = false;
-                IsEnabled = true;
                 await dialogService.ShowMessage("Error", connection.Message);
                 return;
             }
 
+            product.CategotyId = MainViewModel.GetInstance().Category.CategotyId;
+            product.Description = Description;
+            product.Price = Price;
+            product.Remarks = Remarks;
+            product.Stock = Stock;
+            product.IsActive = IsActive;
+            product.LastPurchase = DateTime.Now;
 
-            category.Description = Description;
             var mainViewModel = MainViewModel.GetInstance();
 
             var response = await apiService.Put(
                 "https://productsapifab.azurewebsites.net",
                 "/api",
-                "/Categories",
+                "/Products",
                 mainViewModel.Token.TokenType,
                 mainViewModel.Token.AccessToken,
-                category);
+                product);
 
             if (!response.IsSuccess)
             {
                 IsRunning = false;
-                IsEnabled = true;
                 await dialogService.ShowMessage(
                     "Error",
                     response.Message);
                 return;
             }
 
-            var categoriesViewModel = CategoriesViewModel.GetInstance();
-            categoriesViewModel.UpdateCategory(category);
+            var productsViewModel = ProductsViewModel.GetInstance();
+            productsViewModel.UpdateProduct(product);
 
             await navigationService.Back();
 
             IsRunning = false;
-            IsEnabled = true;
         }
         #endregion
     }

@@ -31,7 +31,17 @@ namespace Products.ViewModels
             get; set;
         }
 
+        public NewProductViewModel NewProduct
+        {
+            get; set;
+        }
+
         public EditCategoryViewModel EditCategory
+        {
+            get; set;
+        }
+
+        public EditProductViewModel EditProduct
         {
             get; set;
         }
@@ -85,6 +95,20 @@ namespace Products.ViewModels
         {
             NewCategory = new NewCategoryViewModel();
             await navigationService.Navigate("NewCategoryView");
+        }
+
+        public ICommand NewProductCommand
+        {
+            get
+            {
+                return new RelayCommand(GoNewProduct);
+            }
+        }
+
+        async void GoNewProduct()
+        {
+            NewProduct = new NewProductViewModel();
+            await navigationService.Navigate("NewProductView");
         }
         #endregion
     }
