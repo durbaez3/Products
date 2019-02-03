@@ -4,6 +4,7 @@ namespace Products.Models
     public class Product
     {
         public int ProductId { get; set; }
+        public int CategotyId { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
         public decimal Price { get; set; }

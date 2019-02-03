@@ -69,6 +69,7 @@
         async void SelectCategory()
         {
             MainViewModel.GetInstance().Products = new ProductsViewModel(Products);
+            MainViewModel.GetInstance().Category = this;
             await navigationService.Navigate("ProductsView");
         }
         #endregion

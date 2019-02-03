@@ -11,6 +11,11 @@ namespace Products.ViewModels
     public class MainViewModel
     {
         #region Properties
+
+        public Category Category 
+        { 
+            get; set; 
+        }
         public LoginViewModel Login
         {
             get; set;
