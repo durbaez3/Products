@@ -51,11 +51,38 @@ namespace Products.Models
             await navigationService.Navigate("EditProductView");
         }
 
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                return new RelayCommand(Delete);
+            }
+        }
+
+        async void Delete()
+        {
+            var response = await dialogService.ShowConfirm(
+                "Confirm",
+                "Area you Sure to delete this record?");
+            if (!response)
+            {
+                return;
+            }
+            await ProductsViewModel.GetInstance().DeleteProduct(this);
+        }
+
+
         public Product()
         {
             dialogService = new DialogService();
             navigationService = new NavigationService();
         }
 
+        #region Methods
+        public override int GetHashCode()
+        {
+            return ProductId;
+        }
+        #endregion
     }
 }

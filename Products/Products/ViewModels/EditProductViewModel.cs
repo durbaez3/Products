@@ -108,7 +108,7 @@ namespace Products.ViewModels
             product.Remarks = Remarks;
             product.Stock = Stock;
             product.IsActive = IsActive;
-            product.LastPurchase = DateTime.Now;
+            product.LastPurchase = LastPurchase;
 
             var mainViewModel = MainViewModel.GetInstance();
 
