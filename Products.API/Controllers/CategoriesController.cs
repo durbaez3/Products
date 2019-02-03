@@ -32,7 +32,7 @@ namespace Products.API.Controllers
                 {
                     productsResponse.Add(new ProductResponse
                     {
-                        CategoryId = product.CategoryId,
+                        CategotyId = product.CategotyId,
                         Description = product.Description,
                         Image = product.Image,
                         IsActive = product.IsActive,

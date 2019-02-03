@@ -43,7 +43,7 @@ namespace Products.Backend.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategotyId", "Description");
+            ViewBag.CategotyId = new SelectList(db.Categories, "CategotyId", "Description");
             return View();
         }
 
@@ -72,7 +72,7 @@ namespace Products.Backend.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Description", view.CategoryId);
+            ViewBag.CategotyId = new SelectList(db.Categories, "CategotyId", "Description", view.CategotyId);
             return View(view);
         }
 
@@ -81,7 +81,7 @@ namespace Products.Backend.Controllers
             return new Product
             {
                 Category = view.Category,
-                CategoryId = view.CategoryId,
+                CategotyId = view.CategotyId,
                 Description = view.Description,
                 Image = view.Image,
                 IsActive = view.IsActive,
@@ -108,7 +108,7 @@ namespace Products.Backend.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Description", product.CategoryId);
+            ViewBag.CategotyId = new SelectList(db.Categories, "CategotyId", "Description", product.CategotyId);
             var view = ToView(product);
             return View(view);
         }
@@ -118,7 +118,7 @@ namespace Products.Backend.Controllers
             return new ProductView
             {
                 Category = product.Category,
-                CategoryId = product.CategoryId,
+                CategotyId = product.CategotyId,
                 Description = product.Description,
                 Image = product.Image,
                 IsActive = product.IsActive,
@@ -155,7 +155,7 @@ namespace Products.Backend.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Description", view.CategoryId);
+            ViewBag.CategotyId = new SelectList(db.Categories, "CategotyId", "Description", view.CategotyId);
             return View(view);
         }
 

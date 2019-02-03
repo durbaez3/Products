@@ -14,8 +14,8 @@ namespace Products.Domain
         [Key]
         public int ProductId { get; set; }
 
-        [ForeignKey("Category")]
-        public int CategoryId { get; set; }
+        //[ForeignKey("Category")]
+        public int CategotyId { get; set; }
 
         [Required(ErrorMessage = "The Field {0} is required")]
         [MaxLength(50, ErrorMessage = "Field {0} only can contain {1} characters lentgh")]

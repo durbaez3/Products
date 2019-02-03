@@ -13,7 +13,7 @@
         NavigationService navigationService;
         #endregion
         #region Properties
-        public int CategoryId { get; set; }
+        public int CategotyId { get; set; }
 
         public string Description { get; set; }
 
@@ -61,7 +61,7 @@
         #region Methods
         public override int GetHashCode()
         {
-            return CategoryId;
+            return CategotyId;
         }
         #endregion
     }

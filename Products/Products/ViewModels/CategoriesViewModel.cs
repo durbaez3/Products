@@ -59,8 +59,8 @@ namespace Products.ViewModels
         {
             IsRefreshing = true;
             var oldCategory = categories.
-                Where(c => c.CategoryId == category
-                .CategoryId).FirstOrDefault();
+                Where(c => c.CategotyId == category
+                .CategotyId).FirstOrDefault();
 
             oldCategory = category;
             //categories.Add(category);
