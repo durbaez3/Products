@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             BackgroundColor = "{StaticResource BackgroundColor}"
              x:Class="Products.Views.LoginView"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Login">
@@ -23,6 +24,7 @@
                 <Label
                     Grid.Row="0"
                     Grid.Column="0"
+                    TextColor = "{StaticResource FontColor}"
                     Text="Email"
                         VerticalOptions="Center">
                 </Label>
@@ -36,6 +38,7 @@
                 <Label
                     Grid.Row="1"
                     Grid.Column="0"
+                    TextColor = "{StaticResource FontColor}"
                     Text="Password">
                 </Label>
                 <Entry
@@ -56,6 +59,7 @@
                 <Label
                     HorizontalOptions="StartAndExpand"
                     VerticalOptions="CenterAndExpand"
+                        TextColor = "{StaticResource FontColor}"
                     Text="Remember this device">
                 </Label>
                 <Switch
@@ -66,7 +70,7 @@
             <Label
                     HorizontalOptions="Center"
                     Text="Forgot your password?"
-                    TextColor="Green">
+                    TextColor = "{StaticResource MainColor}">
             </Label>
             
             <StackLayout
@@ -76,7 +80,7 @@
                 <Button
                     Text="Login"
                     Command = "{Binding LoginCommand}"
-                    BackgroundColor="Navy"
+                    BackgroundColor="{StaticResource AccentColor1}"
                     TextColor="White"
                     BorderRadius="20"
                     HeightRequest="46"
@@ -85,7 +89,7 @@
                 </Button>
                 <Button
                     Text="Register"
-                    BackgroundColor="Purple"
+                    BackgroundColor="{StaticResource AccentColor2}"
                     TextColor="White"
                     BorderRadius="20"
                     HeightRequest="46"

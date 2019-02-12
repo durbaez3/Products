@@ -53,11 +53,18 @@ namespace Products.ViewModels
         { 
             get; set; 
         }
+
+        public string Image 
+        { 
+            get; set; 
+            }
         #endregion
 
         #region Constructors
         public NewProductViewModel()
         {
+            Image = "noimage";
+            LastPurchase = DateTime.Today;
             dialogService = new DialogService();
             apiService = new ApiService();
             navigationService = new NavigationService();
@@ -102,7 +109,7 @@ namespace Products.ViewModels
                 Stock = Stock,
                 Remarks = Remarks,
                 IsActive = IsActive,
-                LastPurchase = DateTime.Now,
+                LastPurchase = LastPurchase,
             };
 
             this.IsRunning = false;
@@ -133,7 +140,7 @@ namespace Products.ViewModels
             var productViewModel = ProductsViewModel.GetInstance();
             productViewModel.AddProduct(product);
 
-            await navigationService.Back();
+            await navigationService.BackOnMaster();
 
             IsRunning = false;
         }

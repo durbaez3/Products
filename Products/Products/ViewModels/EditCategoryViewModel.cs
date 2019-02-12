@@ -18,7 +18,6 @@
         private bool isRunning;
         public bool isEnabled;
         Category category;
-        private Product product;
         #endregion
 
         #region Properties
@@ -112,7 +111,7 @@
             var categoriesViewModel = CategoriesViewModel.GetInstance();
             categoriesViewModel.UpdateCategory(category);
 
-            await navigationService.Back();
+            await navigationService.BackOnMaster();
 
             IsRunning = false;
             IsEnabled = true;

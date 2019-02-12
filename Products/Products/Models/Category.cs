@@ -54,7 +54,7 @@
         async void Edit()
         {
             MainViewModel.GetInstance().EditCategory = new  EditCategoryViewModel(this);
-            await navigationService.Navigate("EditCategoryView");
+            await navigationService.NavigateOnMaster("EditCategoryView");
         }
 
         public ICommand SelectCategoryCommand 
@@ -68,7 +68,7 @@
         {
             MainViewModel.GetInstance().Products = new ProductsViewModel(Products);
             MainViewModel.GetInstance().Category = this;
-            await navigationService.Navigate("ProductsView");
+            await navigationService.NavigateOnMaster("ProductsView");
         }
         #endregion
 

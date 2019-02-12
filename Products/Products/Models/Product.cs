@@ -29,14 +29,15 @@ namespace Products.Models
             {
                 if (!string.IsNullOrEmpty(Image))
                 {
-                    return string.Format("https://productsbackendfab.azurewebsites.net/{0}",
+                    return string.Format("https://productsapifab.azurewebsites.net/{0}",
                     Image.Substring(1));
                 }
-                return Image;
+                return "noimage";
             }
         }
         #endregion
 
+        #region Commands
         public ICommand EditCommand
         {
             get
@@ -48,7 +49,7 @@ namespace Products.Models
         async void Edit()
         {
             MainViewModel.GetInstance().EditProduct = new EditProductViewModel(this);
-            await navigationService.Navigate("EditProductView");
+            await navigationService.NavigateOnMaster("EditProductView");
         }
 
         public ICommand DeleteCommand
@@ -77,6 +78,7 @@ namespace Products.Models
             dialogService = new DialogService();
             navigationService = new NavigationService();
         }
+        #endregion
 
         #region Methods
         public override int GetHashCode()

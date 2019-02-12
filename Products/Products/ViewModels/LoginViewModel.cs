@@ -125,7 +125,7 @@ namespace Products.ViewModels
 
             MainViewModel.GetInstance().Token = response;
             MainViewModel.GetInstance().Categories = new CategoriesViewModel();
-            await navigationService.Navigate("CategoriesView");
+            navigationService.SetMainPage("MasterView");
         }
         #endregion
 

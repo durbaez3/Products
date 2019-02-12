@@ -21,6 +21,7 @@
             <Label
                 Text="Price"></Label>
             <Entry
+                Keyboard="Numeric"
                 Text = "{Binding Price, Mode=TwoWay}"
                 Placeholder="Entry Price"></Entry>
             <StackLayout
@@ -39,11 +40,12 @@
             <Label
                 Text="LastPurchase"></Label>
             <DatePicker
-                Date ="{Binding LastPurchase}">                
+                Date ="{Binding LastPurchase, Mode=TwoWay}">                
             </DatePicker>
             <Label
                 Text="Stock"></Label>
             <Entry
+                Keyboard="Numeric"
                 Text = "{Binding Stock, Mode=TwoWay}"
                 Placeholder="Entry Stock"></Entry>
             <Label
@@ -51,6 +53,11 @@
             <Entry
                 Text = "{Binding Remarks, Mode=TwoWay}"
                 Placeholder="Entry Remarks"></Entry>
+            <Image
+                HeightRequest="200"
+                Source = "{Binding Image, Mode=TwoWay}"
+                WidthRequest="200">
+            </Image>
             <ActivityIndicator
                     VerticalOptions="CenterAndExpand"
                     IsRunning = "{Binding IsRunning, Mode=TwoWay}">

@@ -3,6 +3,7 @@
 
 namespace Products.ViewModels
 {
+    using System.Collections.ObjectModel;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Products.Models;
@@ -11,6 +12,12 @@ namespace Products.ViewModels
     public class MainViewModel
     {
         #region Properties
+
+        public ObservableCollection<Menu> MyMenu
+        {
+            get;
+            set;
+        }
 
         public Category Category 
         { 
@@ -62,10 +69,39 @@ namespace Products.ViewModels
         {
             instance = this;
             this.Login = new LoginViewModel();
+
             navigationService = new NavigationService();
+            LoadMenu();
         }
         #endregion
 
+        #region Methods
+        void LoadMenu()
+        {
+            MyMenu = new ObservableCollection<Menu>();
+
+            MyMenu.Add(new Menu
+            {
+                Icon = "ic_settings",
+                PageName = "MyProfileView",
+                Title = "My Profile",
+            });
+
+            MyMenu.Add(new Menu
+            {
+                Icon = "ic_map",
+                PageName = "UbicationsView",
+                Title = "Ubications",
+            });
+
+            MyMenu.Add(new Menu
+            {
+                Icon = "ic_exit_to_app",
+                PageName = "LoginView",
+                Title = "Close sesion",
+            });
+        }
+        #endregion
         #region Singleton
         public static MainViewModel instance;
 
@@ -94,7 +130,7 @@ namespace Products.ViewModels
         async void GoNewCategory()
         {
             NewCategory = new NewCategoryViewModel();
-            await navigationService.Navigate("NewCategoryView");
+            await navigationService.NavigateOnMaster("NewCategoryView");
         }
 
         public ICommand NewProductCommand
@@ -108,7 +144,7 @@ namespace Products.ViewModels
         async void GoNewProduct()
         {
             NewProduct = new NewProductViewModel();
-            await navigationService.Navigate("NewProductView");
+            await navigationService.NavigateOnMaster("NewProductView");
         }
         #endregion
     }

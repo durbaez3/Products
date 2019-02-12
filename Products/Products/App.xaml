@@ -7,6 +7,17 @@
         
         <ResourceDictionary>
             <infra:InstanceLocator x:Key="Locator"/>
+            
+            <!-- Parameters -->
+            <x:String x:Key="URLAPI">http://productszuluapi.azurewebsites.net</x:String> 
+            
+            <!-- Colors -->
+            <Color x:Key="MainColor">#1CA5B8</Color>
+            <Color x:Key="FontColor">#012C40</Color>
+            <Color x:Key="AccentColor1">#FF5521</Color>
+            <Color x:Key="AccentColor2">#4DB84B</Color>
+            <Color x:Key="BackgroundColor">#DAEBF2</Color>
+            
         </ResourceDictionary>
         
     </Application.Resources>

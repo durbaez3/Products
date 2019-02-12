@@ -132,7 +132,7 @@ namespace Products.ViewModels
             var productsViewModel = ProductsViewModel.GetInstance();
             productsViewModel.UpdateProduct(product);
 
-            await navigationService.Back();
+            await navigationService.BackOnMaster();
 
             IsRunning = false;
         }
