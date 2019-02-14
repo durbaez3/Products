@@ -14,6 +14,9 @@ namespace Products.Services
                 case "LoginView":
                     Application.Current.MainPage = new NavigationPage(new LoginView());
                     break;
+                case "UbicatiosView":
+                    Application.Current.MainPage = new NavigationPage(new UbicatiosView());
+                    break;
                 case "MasterView":
                     Application.Current.MainPage = new MasterView();
                     break;
@@ -49,9 +52,10 @@ namespace Products.Services
                     await App.Navigator.PushAsync(
                         new EditProductView());
                     break;
-                
-                
-                
+                case "UbicatiosView":
+                    await App.Navigator.PushAsync(
+                        new UbicatiosView());
+                    break;
             }
         }
 

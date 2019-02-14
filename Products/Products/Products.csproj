@@ -16,6 +16,8 @@
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
+    <PackageReference Include="Xamarin.Forms.Maps" Version="2.5.0.91635" />
+    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
@@ -28,5 +30,9 @@
     <Compile Remove="MainPage.xaml.cs" />
     <Compile Remove="Services\async.cs" />
     <Compile Remove="Views\ProductsView.cs" />
+    <Compile Remove="Views\UbicationView.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\UbicationView.xaml" />
   </ItemGroup>
 </Project>

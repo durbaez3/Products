@@ -28,6 +28,11 @@ namespace Products.ViewModels
             get; set;
         }
 
+        public UbicationsViewModel Ubications 
+        { 
+            get; set; 
+        }
+
         public CategoriesViewModel Categories
         {
             get; set;
@@ -84,21 +89,21 @@ namespace Products.ViewModels
             {
                 Icon = "ic_settings",
                 PageName = "MyProfileView",
-                Title = "My Profile",
+                Title = "Mi Profile",
             });
 
             MyMenu.Add(new Menu
             {
                 Icon = "ic_map",
-                PageName = "UbicationsView",
-                Title = "Ubications",
+                PageName = "UbicatiosView",
+                Title = "Ubicacion",
             });
 
             MyMenu.Add(new Menu
             {
                 Icon = "ic_exit_to_app",
                 PageName = "LoginView",
-                Title = "Close sesion",
+                Title = "Cerrar Sesion",
             });
         }
         #endregion

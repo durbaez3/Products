@@ -38,13 +38,18 @@ namespace Products.Models
 
         }
 
-        private void Navigate()
+        async void Navigate()
         {
             switch (PageName)
             {
                 case "LoginView":
                     MainViewModel.GetInstance().Login = new LoginViewModel();
                     navigation.SetMainPage("LoginView");
+                    break;
+                case "UbicatiosView":
+                    MainViewModel.GetInstance().Ubications =
+                    new UbicationsViewModel();
+                    await navigation.NavigateOnMaster("UbicatiosView");
                     break;
             }
         }
