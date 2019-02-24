@@ -22,5 +22,8 @@ namespace Products.Domain
 
         public DbSet<Product> Products { get; set; }
 
+        public System.Data.Entity.DbSet<Products.Domain.Ubication> Ubications { get; set; }
+
+        public System.Data.Entity.DbSet<Products.Domain.Customer> Customers { get; set; }
     }
 }
